@@ -1,0 +1,33 @@
+{
+  "name": "payload-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "bun --watch ./src/server.ts",
+    "build:payload": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload build",
+    "build:server": "swc src --out-dir dist",
+    "build": "pnpm copyfiles && pnpm build:payload && pnpm build:server",
+    "serve": "cross-env PAYLOAD_CONFIG_PATH=dist/payload.config.js NODE_ENV=production node dist/server.js",
+    "copyfiles": "copyfiles -u 1 \"src/**/*.{html,css,scss,ttf,woff,woff2,eot,svg,jpg,png}\" dist/",
+    "generate:types": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload generate:types",
+    "generate:graphQLSchema": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload generate:graphQLSchema"
+  },
+  "keywords": [],
+  "author": "Sanna Jammeh",
+  "license": "ISC",
+  "dependencies": {
+    "@payloadcms/bundler-vite": "^0.1.2",
+    "@payloadcms/db-mongodb": "^1.0.0",
+    "@payloadcms/plugin-cloud": "^2.0.0",
+    "@payloadcms/richtext-lexical": "^0.1.11",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.3.1",
+    "express": "^4.17.1",
+    "payload": "^2.0.6"
+  },
+  "devDependencies": {
+    "bun-types": "^1.0.7",
+    "typescript": "^5.2.2"
+  }
+}
